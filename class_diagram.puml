@@ -1,0 +1,54 @@
+@startuml
+skinparam ClassAttributeIconSize 0
+skinparam backgroundColor #FEFEFE
+
+class User {
+    - Long id
+    - String firstName
+    - String lastName
+    - String email
+    - List<Account> accounts
+    - List<AuthMethod> authMethods
+}
+
+abstract class AuthMethod {
+    - Long id
+    - Boolean isActive
+    - LocalDateTime lastUsed
+}
+
+class PasswordAuth {
+    - String login
+    - String hashedPassword
+}
+
+class FacialAuth {
+    - String faceTemplateData
+    - Double precisionThreshold
+    - String versionAlgorithm
+}
+
+class Account {
+    - Long id
+    - String accountNumber
+    - BigDecimal balance
+    + void credit(BigDecimal amount)
+    + void debit(BigDecimal amount)
+}
+
+class Transaction {
+    - Long id
+    - BigDecimal amount
+    - LocalDateTime timestamp
+    - TransactionType type
+    - Account sourceAccount
+    - Account destinationAccount
+}
+
+AuthMethod <|-- PasswordAuth
+AuthMethod <|-- FacialAuth
+User "1" *-- "1..*" AuthMethod : uses
+User "1" *-- "0..*" Account : owns
+Account "1" -- "0..*" Transaction : logs
+
+@enduml
