@@ -11,7 +11,7 @@ class Config:
             uri = uri.replace("postgres://", "postgresql://", 1)
     else:
         # URL de secours pour le développement local si DATABASE_URL est vide
-        uri = 'postgresql://postgres:azerty@localhost:5432/banquebd'
+        uri = 'postgresql://postgres:azerty@localhost:5000/banquebd'
     
     SQLALCHEMY_DATABASE_URI = uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
