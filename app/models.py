@@ -15,6 +15,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
     
     # Relations
     accounts = db.relationship('Account', backref='owner', lazy=True)

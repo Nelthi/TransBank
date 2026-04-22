@@ -3,6 +3,7 @@ from app.models import db
 from flasgger import Swagger  # Importation de Swagger pour la documentation de l'API
 from app.routes import auth_bp
 from config import Config
+from flask_migrate import Migrate
 
 def create_app():
     app = Flask(__name__)
@@ -10,6 +11,12 @@ def create_app():
 
     # Initialisation de la doc Swagger
     swagger = Swagger(app)
+
+
+    # Initialisation de Flask-Migrate pour la gestion des migrations de la base de données
+
+    Migrate(app, db)
+
 
     db.init_app(app)
 
